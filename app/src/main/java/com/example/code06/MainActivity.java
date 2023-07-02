@@ -41,27 +41,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(llm);
         recyclerView.setAdapter(newsAdapter);
 
-         /*ListView lvNewsList = findViewById(R.id.lv_news_list);
 
-         lvNewsList.setAdapter(newsAdapter);
-
-        SimpleAdapter simpleAdapter = new SimpleAdapter(MainActivity.this,
-                dataList, android.R.layout.simple_list_item_2,
-                new String[]{NEWS_TITLE, NEWS_AUTHOR},
-                new int[]{android.R.id.text1, android.R.id.text2});*/
-
-        /*ListView lvNewsList = findViewById(R.id.lv_news_list);
-        lvNewsList.setAdapter(simpleAdapter);*/
-
-
-       /*titles = getResources().getStringArray(R.array.titles);
-         authors = getResources().getStringArray(R.array.authors);
-
-         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-        MainActivity.this, android.R.layout.simple_list_item_1, titles);
-
-         ListView lvNewsList = findViewById(R.id.lv_news_list);
-         lvNewsList.setAdapter(adapter);*/
     }
 
     private void initData() {
