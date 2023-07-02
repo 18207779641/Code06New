@@ -44,4 +44,9 @@ import java.util.List;
 
          return view;
      }
+     class ViewHolder {
+         TextView tvTitle;
+         TextView tvAuthor;
+         ImageView ivImage;
+         }
  }
