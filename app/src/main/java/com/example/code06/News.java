@@ -1,10 +1,12 @@
 package com.example.code06;
 
+import android.graphics.Bitmap;
+
 public class News {
     private String mTitle;
     private String mAuthor;
     private String mContent;
-    private int mImageId;
+    private Bitmap mImageId;
 
     public String getTitle() {
     return mTitle;
@@ -22,11 +24,17 @@ public class News {
         this.mAuthor = Author;
     }
 
-    public int getImageId() {
+    public Bitmap getImageId() {
         return mImageId;
     }
 
-    public void setImageId(int mImageId) {
+    public void setImageId(Bitmap mImageId) {
         this.mImageId = mImageId;
     }
+
+
+    public void setImage(Bitmap bitmap) {
+        this.mImageId=bitmap;
+    }
+
 }

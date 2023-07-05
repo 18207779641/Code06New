@@ -5,7 +5,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.res.TypedArray;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
@@ -34,13 +39,42 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.lv_news_list);
         initData();
 
+        MyDbOpenHelper myDbHelper = new MyDbOpenHelper(MainActivity.this);
+        SQLiteDatabase db = myDbHelper.getReadableDatabase();
+        Cursor cursor1 = db.query(
+                NewsContract.NewsEntry.TABLE_NAME ,
+                 null , null , null , null , null , null);
+
+        List<News> newsList = new ArrayList <>();
+
+        int titleIndex = cursor1.getColumnIndex(
+                 NewsContract.NewsEntry.COLUMN_NAME_TITLE);
+        int authorIndex = cursor1.getColumnIndex(
+                 NewsContract.NewsEntry.COLUMN_NAME_AUTHOR);
+        int imageIndex = cursor1.getColumnIndex(
+                NewsContract.NewsEntry.COLUMN_NAME_IMAGE);
+
+        while (cursor1.moveToNext()) {
+            News news = new News();
+
+            String title = cursor1.getString(titleIndex);
+            String author = cursor1.getString(authorIndex);
+            String image = cursor1.getString(imageIndex);
+
+            Bitmap bitmap = BitmapFactory.decodeStream(
+                    getClass().getResourceAsStream("/" + image));
+
+            news.setTitle(title);
+            news.setAuthor(author);
+            news.setImage(bitmap);
+            newsList.add(news);
+        }
         NewsAdapter newsAdapter = new NewsAdapter(MainActivity.this ,
-        R.layout.list_item , newsList);
+                R.layout.list_item , newsList);
 
         LinearLayoutManager llm = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(llm);
         recyclerView.setAdapter(newsAdapter);
-
 
     }
 
@@ -55,13 +89,13 @@ public class MainActivity extends AppCompatActivity {
             length = titles.length;
         }
 
-        for (int i = 0; i < length; i++) {
-            News news = new News();
-            news.setTitle(titles[i]);
-            news.setAuthor(authors[i]);
-            news.setImageId(images.getResourceId(i, 0));
-
-            newsList.add(news);
-    }
+//        for (int i = 0; i < length; i++) {
+//            News news = new News();
+//            news.setTitle(titles[i]);
+//            news.setAuthor(authors[i]);
+//            news.setImageId(images.getResourceId(i, 0));
+//
+//            newsList.add(news);
+//    }
 }
 }

@@ -44,9 +44,10 @@ import java.util.List;
           holder.tvTitle.setText(news.getTitle());
           holder.tvAuthor.setText(news.getAuthor());
 
-          if (news.getImageId() != -1) {
-         holder.ivImage.setImageResource(news.getImageId());
-         }
+//          if (news.getImageId() != -1) {
+//         holder.ivImage.setImageResource(news.getImageId());
+//         }
+         holder.ivImage.setImageBitmap(news.getImageId());
           }
 
      @Override
